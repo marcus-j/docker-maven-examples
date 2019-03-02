@@ -1,0 +1,12 @@
+version: '3'
+services:
+  fabric8-sample-service:
+    container_name: fabric8-sample-service
+    image: fabric8-docker-maven-plugin:1.0-SNAPSHOT
+    ports:
+      - "8081:8080"
+  spotify-sample-service:
+    container_name: spotify-sample-service
+    image: spotify-docker-maven-plugin:1.0-SNAPSHOT
+    ports:
+      - "8082:8080"
