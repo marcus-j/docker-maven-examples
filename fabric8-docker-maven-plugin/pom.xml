@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>docker-maven-examples</artifactId>
+        <groupId>de.marcusjanke.examples</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>fabric8-docker-maven-plugin</artifactId>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.3.RELEASE</version>
+            </plugin>
+            <plugin>
+                <!-- To run: mvn docker:build -->
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.27.2</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>${project.name}:${project.version}</name>
+                            <build>
+                                <from>openjdk:8</from>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <ports>
+                                    <port>8080</port>
+                                </ports>
+                                <cmd>java -jar maven/${project.name}-${project.version}.jar</cmd>
+                            </build>
+                            <run>
+                                <ports>
+                                    <port>8080:8080</port>
+                                </ports>
+                            </run>
+                        </image>
+                    </images>
+                </configuration>
+                <!-- Adding this part always executes the docker:build during Maven's package phase.
+                     No need to execute above mentioned command. -->
+                <executions>
+                    <execution>
+                        <id>docker:build</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
