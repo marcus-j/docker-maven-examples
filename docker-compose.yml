@@ -10,3 +10,8 @@ services:
     image: spotify-docker-maven-plugin-example:1.0-SNAPSHOT
     ports:
       - "8082:8080"
+  jib-sample-service:
+    container_name: jib-sample-service
+    image: jib-docker-maven-plugin-example:1.0-SNAPSHOT
+    ports:
+      - "8083:8080"

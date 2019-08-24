@@ -6,5 +6,5 @@ Build: `mvn clean package`
 
 Run: `docker-compose up`
 
-Check result: [fabric8](http://localhost:8081) and [spotify](http://localhost:8082) plugin based apps
+Check results: [fabric8](http://localhost:8081), [spotify](http://localhost:8082) and [jib](http://localhost:8083) plugin based apps
 
