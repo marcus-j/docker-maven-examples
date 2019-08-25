@@ -19,6 +19,7 @@
         <module>fabric8-docker-maven-plugin-example</module>
         <module>spotify-docker-maven-plugin-example</module>
         <module>jib-docker-maven-plugin-example</module>
+        <module>spotify-dockerfile-maven-plugin-example</module>
     </modules>
 
     <dependencyManagement>
